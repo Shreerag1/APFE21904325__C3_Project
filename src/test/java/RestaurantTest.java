@@ -2,6 +2,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,6 +31,16 @@ class RestaurantTest {
     	assertFalse(isOpen);
 
     }
+	
+	@Test
+	public void total_order_value_should_match_the_expected_value_based_on_the_items_selected() {
+		restaurant = initializeRestaurant();
+		List<String> menu = new ArrayList<>();
+		menu.add("Sweet corn soup");
+		menu.add("Vegetable lasagne");
+		int totalAmount = restaurant.getOrderValue(menu);
+		assertEquals(388, totalAmount);
+	}
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<OPEN/CLOSED>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -61,6 +73,7 @@ class RestaurantTest {
         restaurant =new Restaurant("Amelie's cafe","Chennai",openingTime,closingTime);
         restaurant.addToMenu("Sweet corn soup",119);
         restaurant.addToMenu("Vegetable lasagne", 269);
+        restaurant.addToMenu("Manchow soup", 150);
         return restaurant;
 	}
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
